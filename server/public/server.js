@@ -7,8 +7,12 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
-app.use(express.static('server/public'));
+app.use(express.static('server'));
 
+const calculator = {
+    calculation = 'Incoming Calculation',
+    newCalcNumber = 0,
+}
 
 app.get('/api/calculator', (req,res) => {
     console.log('im working!!!')
@@ -17,7 +21,7 @@ app.get('/api/calculator', (req,res) => {
     // const val1 = parseInt(solveObject.input1);
     // const val2 = parseInt(solveObject.input2);
     // const mathOp = 
-    res.send(418);
+    res.send({newCalcNumber: calculator.newCalcNumber });
 });
 
 app.listen(PORT, () => {
