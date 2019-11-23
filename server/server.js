@@ -10,8 +10,8 @@ app.use(bodyParser.json());
 app.use(express.static('server/public'));
 
 const calculator = {
-    calculation = 'Incoming Calculation',
-    newCalcNumber = 0,
+    calculation: 'Incoming Calculation',
+    newCalcNumber: 0,
 }
 
 app.get('/api/calculator', (req,res) => {
