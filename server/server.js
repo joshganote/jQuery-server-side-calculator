@@ -9,17 +9,18 @@ app.use(bodyParser.json());
 
 app.use(express.static('server/public'));
 
-// Not totally sure what I'm using this for Im just trying to adapt this from Friday's video
+// Not totally sure what I'm using this for Im just trying to adapt 
+// this from Friday's video
 const calculator = {
-    
     calculation: 'Incoming Calculation',
-    runningCalcTotal: 0,
-};
+    balance: 0,
+}
 
 // this needs to GET info from client input... I believe this working 
 app.get('/api/calculator', (req,res) => {
-    //console.log('im working!!!')
-    res.send({runningCalcTotal: calculator.runningCalcTotal});
+    console.log(typeof balance);
+
+    res.send({balance: calculator.balance});
 });
 
 // I need this to handel all math operations... not sure how to test this in Postman yet
@@ -29,7 +30,11 @@ app.post('/api/mathoperations', (req,res) => {
     const val1 = parseInt(mathObject.input1);
     const val2 = parseInt(mathObject.input2);
     const mathOp = req.body.mathOp;
+    console.log(typeof mathObject); // comes back as number
     
+    // even though I can't get a sum of val1 and val2 in Postman 
+    // with the 'if' statement, I am getting a console.log number
+    // and not a string in terminal. I hope that will set me up for later
     if ( mathOp === "add") {
         answer = val1 + val2;
         res.send(201);
@@ -43,17 +48,18 @@ app.post('/api/mathoperations', (req,res) => {
         answer = val1 / val2;
         res.send(201);
     } else {
-        res.send(500);
+        res.send({message: 'Nice try'});
     }
 });
 
-// this needs to capture calculator input from client side when '=' is pressed and POST to server
+// this needs to capture calculator input 
+// from client side when '=' is pressed and POST to server
+// not confident about this but says created in Postman
 app.post('/api/equalsign', (req,res) => {
-    const equalBtn = parseInt(req.body.equalBtn).toFixed(2);
-    console.log(equalBtn);
+    const equalBtn = parseInt(req.body.equalBtn);
     
     if (equalBtn) {
-        calculator.runningCalcTotal += equalBtn;
+        calculator.calcBalance += equalBtn;
         res.send(201);
     } else {
         res.send(500);

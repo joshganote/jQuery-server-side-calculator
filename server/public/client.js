@@ -8,20 +8,47 @@ function init() {
     $('.js-divide-btn').on('click', onClickDivide);
     $('.js-equal-btn').on('click', onClickEqual);
     $('.js-clear-btn').on('click', onClickClear);
+    getCalculator();
 }; 
+// API Calls
 
+function getCalculator() {
+    $.ajax({
+        method: 'GET',
+        url: '/api/calculator',
+    })
+    .then(function(response) {
+        console.log('GET Response: ', response);
+        //render(response);
+    })
+    .catch(function(err) {
+        console.log('GET Error: ', err)
+    });
+};
+
+// View Update
+
+function render(calculatorInfo) {
+    const $calcBalance = $('.js-answer-list');
+
+    $calcBalance.append(`
+        ${calculatorInfo.calcBalance}
+    `)
+
+}
+
+// button configuration
 function onClickAdd(event) {
-    console.log('I work');
-    //mathOp
+    mathOp = "add";
 };
 function onClickSubtract(event) {
-    console.log('I work');
+    mathOp = "sub";
 };
 function onClickMultiply(event) {
-    console.log('I work');
+    mathOp = "mult";
 };
 function onClickDivide(event) {
-    console.log('I work');
+    mathOp = "divi";
 };
 function onClickEqual(event) {
     console.log('I work');
