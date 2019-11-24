@@ -11,23 +11,40 @@ app.use(express.static('server/public'));
 
 // Not totally sure what I'm using this for Im just trying to adapt this from Friday's video
 const calculator = {
-    // not sure why I had '=' here instead of ':' I knew better.. ha
+    
     calculation: 'Incoming Calculation',
     runningCalcTotal: 0,
-}
+};
 
-// this needs to GET info from client input 
+// this needs to GET info from client input... I believe this working 
 app.get('/api/calculator', (req,res) => {
-    console.log('im working!!!')
-    // const solveObject = req.body.solveObject;
-
-    // const val1 = parseInt(solveObject.input1);
-    // const val2 = parseInt(solveObject.input2);
-    // const mathOp = 
-
-    // couldn't take a number, has to be in an object like this
-    
+    //console.log('im working!!!')
     res.send({runningCalcTotal: calculator.runningCalcTotal});
+});
+
+// I need this to handel all math operations... not sure how to test this in Postman yet
+app.post('/api/mathoperations', (req,res) => {
+    const mathObject = parseFloat(req.body.mathObject);
+
+    const val1 = parseInt(mathObject.input1);
+    const val2 = parseInt(mathObject.input2);
+    const mathOp = req.body.mathOp;
+    if ( req.body.mathOp === "add") {
+        answer = val1 + val2;
+        //res.send(201);
+    } else if ( req.body.mathOp === "sub"){
+        answer = val1 - val2;
+        //res.send(201);
+    } else if ( req.body.mathOp === "mult"){
+        answer = val1 * val2;
+        //res.send(201);
+    } else if ( req.body.mathOp === "divi"){
+        answer = val1 / val2;
+        //res.send(201);
+    } else {
+        res.send(500);
+    }
+    res.send({mathObject});
 });
 
 // this needs to capture calculator input from client side when '=' is pressed and POST to server
