@@ -29,27 +29,27 @@ app.post('/api/mathoperations', (req,res) => {
     const val1 = parseInt(mathObject.input1);
     const val2 = parseInt(mathObject.input2);
     const mathOp = req.body.mathOp;
-    if ( req.body.mathOp === "add") {
+    
+    if ( mathOp === "add") {
         answer = val1 + val2;
-        //res.send(201);
-    } else if ( req.body.mathOp === "sub"){
+        res.send(201);
+    } else if ( mathOp === "sub"){
         answer = val1 - val2;
-        //res.send(201);
-    } else if ( req.body.mathOp === "mult"){
+        res.send(201);
+    } else if ( mathOp === "mult"){
         answer = val1 * val2;
-        //res.send(201);
-    } else if ( req.body.mathOp === "divi"){
+        res.send(201);
+    } else if ( mathOp === "divi"){
         answer = val1 / val2;
-        //res.send(201);
+        res.send(201);
     } else {
         res.send(500);
     }
-    res.send({mathObject});
 });
 
 // this needs to capture calculator input from client side when '=' is pressed and POST to server
 app.post('/api/equalsign', (req,res) => {
-    const equalBtn = parseFloat(req.body.equalBtn).toFixed(2);
+    const equalBtn = parseInt(req.body.equalBtn).toFixed(2);
     console.log(equalBtn);
     
     if (equalBtn) {
