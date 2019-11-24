@@ -6,10 +6,22 @@ function init() {
     $('.js-subtract-btn').on('click', onClickSubtract);
     $('.js-multiply-btn').on('click', onClickMultiply);
     $('.js-divide-btn').on('click', onClickDivide);
-    $('.js-equal-btn').on('click', onClickEqual);
+    $('.js-submit-btn').on('click', onSubmitEquation);
     $('.js-clear-btn').on('click', onClickClear);
     getCalculator();
 }; 
+
+function onSubmitEquation(event){
+    const answerList = $('.js-answer-list');
+    let calcAmount = answerList.val();
+    console.log('Calculate Amount:', calcAmount)
+    calcAmount = parseFloat(calcAmount);
+    parseFloat(answerList);
+    
+    postMathOperations(calcAmount);
+    
+}
+
 // API Calls
 
 function getCalculator() {
@@ -19,20 +31,40 @@ function getCalculator() {
     })
     .then(function(response) {
         console.log('GET Response: ', response);
-        //render(response);
+        render(response);
     })
     .catch(function(err) {
         console.log('GET Error: ', err)
     });
 };
 
+function postMathOperations(calculate){
+    const data = {
+        val1: $('.'),
+    };
+    console.log('POST Calculate: ', data);
+    $.ajax({
+        method: 'POST',
+        url: '/api/mathoperations',
+        data: data
+    })
+    .then(function(response) {
+        console.log('POST Response: ', response);
+        //render(response);
+    })
+    .catch(function(err) {
+        console.log('POST Error: ', err)
+    });
+}
+
 // View Update
 
 function render(calculatorInfo) {
-    const $calcBalance = $('.js-answer-list');
+    const $balanceList = $('.js-balance-list');
 
-    $calcBalance.append(`
-        ${calculatorInfo.calcBalance}
+    $balanceList.empty();
+    $balanceList.append(`
+        ${calculatorInfo.balance}
     `)
 
 }
@@ -50,9 +82,17 @@ function onClickMultiply(event) {
 function onClickDivide(event) {
     mathOp = "divi";
 };
-function onClickEqual(event) {
-    console.log('I work');
-}
+
 function onClickClear(event) {
-    console.log('I work');
+    
 }
+// const answerObject = {
+//     firstValue: $('.js-first-value').val(),
+//     secondValue: $('.js-second-value').val(),
+// };
+
+// let AddObject = {
+//     firstValue: $('.js-first-value').val(),
+//     secondValue: $('.js-second-value').val(),
+// };
+// console.log(AddObject);

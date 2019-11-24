@@ -19,13 +19,12 @@ const calculator = {
 const equationHistory = [];
 // this needs to GET info from client input... I believe this working 
 app.get('/api/calculator', (req,res) => {
-    console.log(typeof calculator.balance);
+    console.log(typeof calculator.balance);// make sense right here. Thanks for the video
 
     res.send({balance: calculator.balance});
 });
 
 app.get('/api/history', (req,res) => {
-    
     res.send(equationHistory);
 });
 
@@ -38,7 +37,7 @@ app.post('/api/mathoperations', (req,res) => {
     const val2 = parseFloat(mathObject.input2);
     const mathOp = mathObject.mathOp;
     
-    // even though I can't get a sum of val1 and val2 in Postman 
+    // even though I can't get a sum of val1 and val2 in Postman        
     // with the 'if' statement, I am getting a console.log number
     // and not a string in terminal. I hope that will set me up for later
     if ( mathOp === "add") {
