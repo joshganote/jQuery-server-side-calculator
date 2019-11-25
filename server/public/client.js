@@ -32,7 +32,7 @@ function onSubmitEquation(event){
 }
 
 // API Calls
-
+// Get
 function getCalculator() {
     $.ajax({
         method: 'GET',
@@ -47,6 +47,7 @@ function getCalculator() {
     });
 };
 
+// Post 
 function postMathOperations(calculate){
     const data = {
         calculate: calculate,
@@ -59,31 +60,28 @@ function postMathOperations(calculate){
     })
     .then(function(response) {
         console.log('POST Response: ', response);
-        //getCalculator();
+        render(response);
     })
     .catch(function(err) {
         console.log('POST Error: ', err)
     });
 }
 
-// button configuration
+// Math Operators
 function onClickAdd(event) {
      mathOp = "add";
-     answer = "=";
 };
 function onClickSubtract(event) {
     mathOp = "sub";
-    answer = "=";
 };
 function onClickMultiply(event) {
     mathOp = "mult";
-    answer = "=";
 };
 function onClickDivide(event) {
     mathOp = "divi";
-    answer = "=";
 };
 
+// clear inputs
 function onClickClear(event) {
 
     $('.js-first-value').val('');
@@ -92,7 +90,6 @@ function onClickClear(event) {
 }
 
 // View Update
-
 function render(calculatorInfo) {
     const $balanceList = $('.js-balance-list');
 
@@ -101,16 +98,4 @@ function render(calculatorInfo) {
         ${calculatorInfo.balance}
     `)
 
-}
-
-
-// const answerObject = {
-//     firstValue: $('.js-first-value').val(),
-//     secondValue: $('.js-second-value').val(),
-// };
-
-// let AddObject = {
-//     firstValue: $('.js-first-value').val(),
-//     secondValue: $('.js-second-value').val(),
-// };
-// console.log(AddObject);
+};
