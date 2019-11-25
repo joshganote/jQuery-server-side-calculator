@@ -36,29 +36,31 @@ app.post('/api/mathoperations', (req,res) => {
     const val1 = parseFloat(mathObject.input1);
     const val2 = parseFloat(mathObject.input2);
     const mathOp = mathObject.mathOp;
+    const answer = calculator.balance;
     
-    // even though I can't get a sum of val1 and val2 in Postman        
+    
+    // even though I can't get a sum of val1 and val2 in Postman 
     // with the 'if' statement, I am getting a console.log number
     // and not a string in terminal. I hope that will set me up for later
-    if ( mathOp === "add") {
+    if ( mathOp === "add" && answer === "=") {
         answer = val1 + val2;
         mathObject.answer = answer;
         equationHistory.push(mathObject);
         console.log(equationHistory);
         res.send({answer: answer});
-    } else if ( mathOp === "sub"){
+    } else if ( mathOp === "sub" && answer === "="){
         answer = val1 - val2;
         mathObject.answer = answer;
         equationHistory.push(mathObject);
         console.log(equationHistory);
         res.send({answer: answer});
-    } else if ( mathOp === "mult"){
+    } else if ( mathOp === "mult" && answer === "="){
         answer = val1 * val2;
         mathObject.answer = answer;
         equationHistory.push(mathObject);
         console.log(equationHistory);
         res.send({answer: answer});
-    } else if ( mathOp === "divi"){
+    } else if ( mathOp === "divi" && answer === "="){
         answer = val1 / val2;
         mathObject.answer = answer;
         equationHistory.push(mathObject);
