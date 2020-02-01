@@ -15,7 +15,7 @@ Building upon what I have learned from the previous week, I will now be incorpor
 
 ## Usage 
 
-1 Enter numbers in the input field and select you mathematical operator in the middle. 
+1. Enter numbers in the input field and select you mathematical operator in the middle. 
 2. the "=" button will fire off a post ajax call to the server and run the logic
 3. Use the "c" button the clear the answer on the DOM.
 
